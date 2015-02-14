@@ -1,13 +1,18 @@
-// this line loads the library 
-require('/path/to/twilio-php/Services/Twilio.php'); 
-
+<?php
  
-$account_sid = 'AC4d5dd69fb8df62a37017d811717f36ea'; 
-$auth_token = '[AuthToken]'; 
-$client = new Services_Twilio($account_sid, $auth_token); 
+require "/Library/WebServer/Documents/whatSnack/twilio-php/Services/Twilio.php";
  
-$client->account->messages->create(array( 
-	'To' => <?php echo $_POST["number"], 
-	'From' => "+17313241822", 
-	'Body' => "Snack menu stuff",   
+// set your AccountSid and AuthToken from www.twilio.com/user/account
+$AccountSid = 'AC4d5dd69fb8df62a37017d811717f36ea';
+$AuthToken = '1e87a0f9e44e164c0f08b32a6dbcf2a5';
+ 
+$client = new Services_Twilio($AccountSid, $AuthToken);
+ 
+$message = $client->account->messages->create(array(
+    "From" => "909-303-6196",
+    "To" => $_POST["number"],
+    "Body" => $_POST["message"],
 ));
+ 
+// Display a confirmation message on the screen
+echo "Sent message {$message->sid}";
