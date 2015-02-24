@@ -1,0 +1,83 @@
+import org.jsoup.Jsoup;
+import org.jsoup.helper.Validate;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.*;
+import java.util.*;
+
+
+
+public class first2 {
+	public static void main(String[] args) throws IOException{
+		
+		Scanner a = new Scanner(System.in);
+        
+    	//System.out.println("Please enter food");
+    	
+        String locator = "\"<strong>@options<\\/strong>\",\"nutrition_link\"";  //a.next();
+        //  String food1 = a.next() + "s";
+       // String food2 = a.next();
+        
+	
+	Document doc = Jsoup.connect("http://collins-cmc.cafebonappetit.com/").get();
+	
+	String x = doc.html();
+	String y = doc.outerHtml();
+	//String combo = x + " " + y;
+	//System.out.print(x);
+	
+	int first = 0;
+	String text = x;
+	
+	Scanner scan = new Scanner(text).useDelimiter(":");	
+	
+	while (scan.hasNext()){
+	
+		
+		String word = scan.next() ;
+		
+		if(word.equalsIgnoreCase(locator) && (first == 0)){
+			first = first + 1;
+		}
+	
+		else if (word.equalsIgnoreCase(locator) && (first == 1)){
+			
+			scan.next();
+			scan.next();
+			scan.next();
+			
+			int index = 0;
+			
+			// checker System.out.print("check");
+			
+			String latenightspecial = scan.next();
+			 
+				for(int i = 1; i < latenightspecial.length(); i++){
+			
+				char temp = latenightspecial.charAt(i);
+				
+				if (temp == '\"'){
+					index = i; 
+				
+/*snack ----->*/String snack = latenightspecial.substring(1, index);
+				System.out.println(snack);
+						break;	
+						
+						
+				}
+			}
+			
+		}
+		else{
+			
+			}
+				
+		}	
+		
+		
+		
+	
+		}
+	}
